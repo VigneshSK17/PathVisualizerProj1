@@ -5,23 +5,29 @@ import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints
 import com.acmerobotics.roadrunner.trajectory.constraints.MecanumConstraints
 
-object TrajectoryGen {
+object TrajectoryGen2 {
     // Remember to set these constraints to the same values as your DriveConstants.java file in the quickstart
-    private val driveConstraints = DriveConstraints(60.0, 60.0, 0.0, 270.0.toRadians, 270.0.toRadians, 0.0)
+    private val driveConstraints = DriveConstraints(60.0, 60.0, 0.0, 270.0.toRadians1, 270.0.toRadians1, 0.0)
 
     // Remember to set your track width to an estimate of your actual bot to get accurate trajectory profile duration!
     private const val trackWidth = 16.0
 
     private val combinedConstraints = MecanumConstraints(driveConstraints, trackWidth)
 
-    private val startPose = Pose2d(-48.0, -48.0, 90.0.toRadians)
+    private val startPose = Pose2d(54.0, 55.0, 180.0.toRadians2)
+    private val endPose = Pose2d(54.0, -50.0, 0.0.toRadians2)
 
     fun createTrajectory(): ArrayList<Trajectory> {
         val list = ArrayList<Trajectory>()
 
         val builder1 = TrajectoryBuilder(startPose, startPose.heading, combinedConstraints)
+        builder1.splineToSplineHeading(Pose2d(-12.0, 0.0, -90.0.toRadians2), -90.0.toRadians2)
+// 2 spline .splineToSplineHeading(endPose, -0.05)
+            .splineToSplineHeading(Pose2d(30.0, -48.0, 0.0.toRadians2), -0.05)
+            .splineToSplineHeading(endPose, -0.2)
+//            .splineToConstantHeading(Vector2d(30.0, -47.0), -0.55)
+//            .splineToConstantHeading(Vector2d(endPose.x, endPose.y), 0.0)
 
-        builder1.forward(40.0);
 
         // Small Example Routine
 //        builder1
@@ -38,4 +44,4 @@ object TrajectoryGen {
     }
 }
 
-val Double.toRadians get() = (Math.toRadians(this))
+val Double.toRadians2 get() = (Math.toRadians(this))
