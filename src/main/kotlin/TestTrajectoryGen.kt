@@ -7,24 +7,24 @@ import com.acmerobotics.roadrunner.trajectory.constraints.MecanumConstraints
 
 object TestTrajectoryGen {
     // Remember to set these constraints to the same values as your DriveConstants.java file in the quickstart
-    private val driveConstraints = DriveConstraints(60.0, 60.0, 0.0, 270.0.toRadiansTest, 270.0.toRadiansTest, 0.0)
+    private val driveConstraints = DriveConstraints(60.0, 60.0, 0.0, 270.0.toRadians4, 270.0.toRadians4, 0.0)
 
     // Remember to set your track width to an estimate of your actual bot to get accurate trajectory profile duration!
     private const val trackWidth = 16.0
 
     private val combinedConstraints = MecanumConstraints(driveConstraints, trackWidth)
 
-    private val startPose = Pose2d(-48.0, -48.0, 180.0.toRadiansTest)
-    private val wobbleGoalPose1 = Pose2d(36.0, -48.0, 0.0.toRadiansTest)
-    private val highGoalPose1 = Pose2d(-36.0, -48.0, 0.0.toRadiansTest)
-    private val highGoalPose2 = Pose2d(-36.0, -36.0, 0.0.toRadiansTest)
-    private val highGoalPose3 = Pose2d(-12.0, -36.0, 0.0.toRadiansTest)
+    private val startPose = Pose2d(-48.0, -48.0, 180.0.toRadians4)
+    private val wobbleGoalPose1 = Pose2d(36.0, -48.0, 0.0.toRadians4)
+    private val highGoalPose1 = Pose2d(-36.0, -48.0, 0.0.toRadians4)
+    private val highGoalPose2 = Pose2d(-36.0, -36.0, 0.0.toRadians4)
+    private val highGoalPose3 = Pose2d(-12.0, -36.0, 0.0.toRadians4)
 
     fun createTrajectory(): ArrayList<Trajectory> {
         val list = ArrayList<Trajectory>()
 
         val wobbleGoalBuilder1 = TrajectoryBuilder(startPose, startPose.heading, combinedConstraints)
-        wobbleGoalBuilder1.lineToLinearHeading(Pose2d(36.0, -48.0, 0.0.toRadiansTest))
+        wobbleGoalBuilder1.lineToLinearHeading(Pose2d(36.0, -48.0, 0.0.toRadians4))
 //            .addTemporalMarker(2.0, MarkerCallback{ println("Dropping wobble...")})
         list.add(wobbleGoalBuilder1.build())
         // Drop wobble
@@ -43,17 +43,17 @@ object TestTrajectoryGen {
         val wobbleGoalBuilder2_1 = TrajectoryBuilder(highGoalPose3, highGoalPose3.heading, combinedConstraints)
         wobbleGoalBuilder2_1.back(36.0)
         list.add(wobbleGoalBuilder2_1.build())
-        val wobbleGoalBuilder2_2 = TrajectoryBuilder(Pose2d(-48.0, -36.0, 0.0.toRadiansTest), 0.0.toRadiansTest, combinedConstraints)
+        val wobbleGoalBuilder2_2 = TrajectoryBuilder(Pose2d(-48.0, -36.0, 0.0.toRadians4), 0.0.toRadians4, combinedConstraints)
         wobbleGoalBuilder2_2.strafeLeft(1.0)
         list.add(wobbleGoalBuilder2_2.build())
         // Grab Wobble Goal
-        val wobbleGoalBuilder2_3 = TrajectoryBuilder(Pose2d(-48.0, -35.0, 0.0.toRadiansTest), 0.0.toRadiansTest, combinedConstraints)
-        wobbleGoalBuilder2_3.lineToLinearHeading(Pose2d(36.0, -24.0, 180.0.toRadiansTest))
+        val wobbleGoalBuilder2_3 = TrajectoryBuilder(Pose2d(-48.0, -35.0, 0.0.toRadians4), 0.0.toRadians4, combinedConstraints)
+        wobbleGoalBuilder2_3.lineToLinearHeading(Pose2d(36.0, -24.0, 180.0.toRadians4))
         list.add(wobbleGoalBuilder2_3.build())
 
-        val centerLineBuilder = TrajectoryBuilder(Pose2d(36.0, -24.0, 180.0.toRadiansTest), 180.0.toRadiansTest, combinedConstraints)
-        centerLineBuilder.splineTo(Vector2d(48.0, -24.0), 180.0.toRadiansTest)
-        centerLineBuilder.lineToLinearHeading(Pose2d(12.0, -24.0, 180.0.toRadiansTest))
+        val centerLineBuilder = TrajectoryBuilder(Pose2d(36.0, -24.0, 180.0.toRadians4), 180.0.toRadians4, combinedConstraints)
+        centerLineBuilder.splineTo(Vector2d(48.0, -24.0), 180.0.toRadians4)
+        centerLineBuilder.lineToLinearHeading(Pose2d(12.0, -24.0, 180.0.toRadians4))
         list.add(centerLineBuilder.build())
 
 
@@ -71,4 +71,4 @@ object TestTrajectoryGen {
     }
 }
 
-val Double.toRadiansTest get() = (Math.toRadians(this))
+val Double.toRadians get() = (Math.toRadians(this))

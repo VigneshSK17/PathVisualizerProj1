@@ -7,14 +7,14 @@ import com.acmerobotics.roadrunner.trajectory.constraints.MecanumConstraints
 
 object DefaultTrajectoryGen {
     // Remember to set these constraints to the same values as your DriveConstants.java file in the quickstart
-    private val driveConstraints = DriveConstraints(60.0, 60.0, 0.0, 270.0.toRadians1, 270.0.toRadians1, 0.0)
+    private val driveConstraints = DriveConstraints(60.0, 60.0, 0.0, 270.0.toRadiansDef, 270.0.toRadiansDef, 0.0)
 
     // Remember to set your track width to an estimate of your actual bot to get accurate trajectory profile duration!
     private const val trackWidth = 16.0
 
     private val combinedConstraints = MecanumConstraints(driveConstraints, trackWidth)
 
-    private val startPose = Pose2d(-48.0, -48.0, 90.0.toRadians1)
+    private val startPose = Pose2d(-48.0, -48.0, 90.0.toRadiansDef)
 
     fun createTrajectory(): ArrayList<Trajectory> {
         val list = ArrayList<Trajectory>()
@@ -38,4 +38,4 @@ object DefaultTrajectoryGen {
     }
 }
 
-val Double.toRadiansDefault get() = (Math.toRadians(this))
+val Double.toRadiansDef get() = (Math.toRadians(this))
