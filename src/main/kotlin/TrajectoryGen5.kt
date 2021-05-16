@@ -17,12 +17,18 @@ object TrajectoryGen5 {
     fun createTrajectory(): ArrayList<Trajectory> {
         val list = ArrayList<Trajectory>()
 
-        val builder1 = TrajectoryBuilder(Pose2d(42.0, 58.0, 135.0.toRadians5), 135.0.toRadians5, combinedConstraints)
-        builder1.lineToSplineHeading(Pose2d(-18.0, -12.0, 180.0.toRadians5))
+//        val builder1 = TrajectoryBuilder(Pose2d(42.0, 58.0, 135.0.toRadians5), 135.0.toRadians5, combinedConstraints)
+        val builder1 = TrajectoryBuilder(Pose2d(42.0, 56.0, -95.0.toRadians5), 225.0.toRadians5, combinedConstraints)
+        builder1.splineToConstantHeading(Vector2d(-18.0, -12.0), -150.0.toRadians5)
+            .splineToConstantHeading(Vector2d(-18.0, 6.0), 20.0.toRadians5)
+            .splineToSplineHeading(Pose2d(-1.0, 3.0, -50.0.toRadians5), -65.0.toRadians5)
+            .splineToSplineHeading(Pose2d(38.0, -58.0, 50.0.toRadians5), -50.0.toRadians5)
+//        builder1.lineToSplineHeading(Pose2d(-18.0, -12.0, 180.0.toRadians5))
 
-        val builder2 = TrajectoryBuilder(Pose2d(-18.0, -12.0, 180.0.toRadians5), 180.0.toRadians5, combinedConstraints)
-        builder2.splineTo(Vector2d(-18.0, 6.0), 20.0.toRadians5)
-        builder2.splineTo(Vector2d(-1.0, 3.0), 20.0.toRadians5)
+//        val builder2 = TrajectoryBuilder(Pose2d(-18.0, -12.0, 180.0.toRadians5), 180.0.toRadians5, combinedConstraints)
+//        val builder2 = TrajectoryBuilder(Pose2d(-18.0, -12.0, 135.0.toRadians5), 135.0.toRadians5, combinedConstraints)
+//        builder2.splineTo(Vector2d(-18.0, 6.0), 20.0.toRadians5)
+//        builder2.splineTo(Vector2d(-1.0, 3.0), 0.0.toRadians5)
 
 
         // Small Example Routine
@@ -31,7 +37,7 @@ object TrajectoryGen5 {
 //            .splineTo(Vector2d(15.0, 15.0), 90.0);
 
         list.add(builder1.build())
-        list.add(builder2.build())
+//        list.add(builder2.build())
 
         return list
     }
