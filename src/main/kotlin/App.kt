@@ -21,7 +21,11 @@ class App : Application() {
     val endRect = Rectangle(100.0, 100.0, 10.0, 10.0)
 
     var startTime = Double.NaN
+<<<<<<< HEAD
     val trajectories = TrajectoryGen4.createTrajectory()
+=======
+    val trajectories = TrajectoryGen2.createTrajectory()
+>>>>>>> parent of 44ef41a... Basic 3rd Path
 
     lateinit var fieldImage: Image
     lateinit var stage: Stage
